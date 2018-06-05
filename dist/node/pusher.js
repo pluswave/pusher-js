@@ -271,7 +271,7 @@ module.exports =
 
 	"use strict";
 	var runtime_1 = __webpack_require__(3);
-	var faye_websocket_1 = __webpack_require__(26);
+	var WebSocket = __webpack_require__(26);
 	var xmlhttprequest_1 = __webpack_require__(27);
 	var net_info_1 = __webpack_require__(28);
 	var xhr_auth_1 = __webpack_require__(29);
@@ -296,7 +296,7 @@ module.exports =
 	        return { ajax: xhr_auth_1["default"] };
 	    },
 	    getWebSocketAPI: function () {
-	        return faye_websocket_1.Client;
+	        return WebSocket;
 	    },
 	    getXHRAPI: function () {
 	        return xmlhttprequest_1.XMLHttpRequest;
@@ -1698,7 +1698,7 @@ module.exports =
 /* 26 */
 /***/ (function(module, exports) {
 
-	module.exports = require("faye-websocket");
+	module.exports = require("ws");
 
 /***/ }),
 /* 27 */
@@ -2223,13 +2223,6 @@ module.exports =
 	            connection.unbind("closed", onClosed);
 	            if (closeEvent.code === 1002 || closeEvent.code === 1003) {
 	                _this.manager.reportDeath();
-	            }
-	            else if (!closeEvent.wasClean && openTimestamp) {
-	                var lifespan = util_1["default"].now() - openTimestamp;
-	                if (lifespan < 2 * _this.maxPingDelay) {
-	                    _this.manager.reportDeath();
-	                    _this.pingDelay = Math.max(lifespan / 2, _this.minPingDelay);
-	                }
 	            }
 	        };
 	        connection.bind("open", onOpen);

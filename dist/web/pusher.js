@@ -2716,13 +2716,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (closeEvent.code === 1002 || closeEvent.code === 1003) {
 	                _this.manager.reportDeath();
 	            }
-	            else if (!closeEvent.wasClean && openTimestamp) {
-	                var lifespan = util_1["default"].now() - openTimestamp;
-	                if (lifespan < 2 * _this.maxPingDelay) {
-	                    _this.manager.reportDeath();
-	                    _this.pingDelay = Math.max(lifespan / 2, _this.minPingDelay);
-	                }
-	            }
 	        };
 	        connection.bind("open", onOpen);
 	        return connection;
